@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\GreetingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +18,6 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/greeting', function () {
-    return view('greeting', ['name' => 'John Doe']);
 });
 
 Route::post('/customers', function () {
@@ -39,17 +37,26 @@ Route::get('/items', function () {
 });
 
 Route::get('/categories', function () {
-    return 'Get categories';
-});
-
-Route::get('/categories/{category_id}/items', function ($category_id) {
-    return response()->json([
+    $result = [
         'categories' => [
             ['name' => 'sushi'],
             ['name' => 'donburi'],
             ['name' => 'ra-men'],
         ],
-    ]);
+    ];
+    return view('category-items')->with('result', $result);
+});
+
+Route::get('/categories/{category_id}/items', function ($category_id) {
+    $result = [
+        'category_id' => $category_id,
+        'category_name' => '寿司',
+        'categories' => [
+            ['name' => 'maguro'],
+            ['name' => 'sake'],
+        ],
+    ];
+    return view('category-items')->with('result', $result);
 });
 
 Route::get('/options', function () {
