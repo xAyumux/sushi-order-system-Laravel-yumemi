@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -36,28 +37,9 @@ Route::get('/items', function () {
     return 'Get items';
 });
 
-Route::get('/categories', function () {
-    $result = [
-        'categories' => [
-            ['name' => 'sushi'],
-            ['name' => 'donburi'],
-            ['name' => 'ra-men'],
-        ],
-    ];
-    return view('category-items')->with('result', $result);
-});
+Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{category_id}/items', function ($category_id) {
-    $result = [
-        'category_id' => $category_id,
-        'category_name' => '寿司',
-        'categories' => [
-            ['name' => 'maguro'],
-            ['name' => 'sake'],
-        ],
-    ];
-    return view('category-items')->with('result', $result);
-});
+Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
 
 Route::get('/options', function () {
     return 'Get options';

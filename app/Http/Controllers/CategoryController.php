@@ -13,7 +13,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $result = [
+            'categories' => [
+                ['name' => 'sushi'],
+                ['name' => 'donburi'],
+                ['name' => 'ra-men'],
+            ],
+        ];
+        return view('category.index', compact('result'));
     }
 
     /**
@@ -45,7 +52,15 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $result = [
+            'category_id' => $id,
+            'category_name' => '寿司',
+            'categories' => [
+                ['name' => 'maguro'],
+                ['name' => 'sake'],
+            ],
+        ];
+        return view('category.items', compact('result'));
     }
 
     /**
