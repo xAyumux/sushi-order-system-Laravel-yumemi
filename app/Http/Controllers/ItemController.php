@@ -13,7 +13,19 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $result = [
+            [
+                'name' => 'maguro',
+                'price' => 200,
+                'category_id' => 1
+            ],
+            [
+                'name' => 'sake',
+                'price' => 200,
+                'category_id' => 1
+            ],
+        ];
+        return view('item.index', compact('result'));
     }
 
     /**

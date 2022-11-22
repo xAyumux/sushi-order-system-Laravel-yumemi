@@ -13,7 +13,13 @@ class OptionController extends Controller
      */
     public function index()
     {
-        //
+        $result = [
+            'options' => [
+                ['name' => 'マヨネーズ'],
+                ['name' => 'チリソース'],
+            ],
+        ];
+        return view('option.index', compact('result'));
     }
 
     /**

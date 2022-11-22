@@ -1,10 +1,13 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\GreetingController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/customers', function () {
-    return 'Welcome';
-});
+Route::post('/customers', [CustomerController::class, 'create']);
 
 Route::post('/order-items', function (Request $request) {
     return 'Ordered';
@@ -33,17 +34,13 @@ Route::get('/orders', function () {
     return 'Get your orders';
 });
 
-Route::get('/items', function () {
-    return 'Get items';
-});
+Route::get('/items', [ItemController::class, 'index']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
 
 Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
 
-Route::get('/options', function () {
-    return 'Get options';
-});
+Route::get('/options', [OptionController::class, 'index']);
 
 Route::delete('/orders/{order_id}/delete-order', function ($order_id) {
     return 'Delete order';
