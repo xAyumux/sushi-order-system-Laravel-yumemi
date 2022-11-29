@@ -13,7 +13,34 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $result = [
+            [
+                'table_number' => 1,
+                'order_items' => [
+                    'item_id' => 1,
+                    'name' => 'maguro',
+                    'price' => 200,
+                    'order_options' => [
+                        'option_id' => 1,
+                        'option_name' => 'mayonnaise',
+                    ],
+                    'amount' => 2,
+                    'delivered_at' => NULL,
+                ]
+            ]
+        ];
+
+        return view('order.index', compact('result'));
+    }
+
+    /**
+     * Display a listing of the uncompleted resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexUncompleted()
+    {
+        return 'Get uncompleted order';
     }
 
     /**
@@ -23,7 +50,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return 'Create new order';
     }
 
     /**
@@ -56,7 +83,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 'Complete order ' . $id;
     }
 
     /**
@@ -79,6 +106,6 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'Destroy order ' . $id;
     }
 }
