@@ -2,7 +2,7 @@
 
 <body>
     <ul>
-        @foreach ($result['items'] as $item)
+        @foreach ($result as $item)
             <li>
                 {{ $item['name'] }}<br>
                 {{ $item['price'] }}<br>
