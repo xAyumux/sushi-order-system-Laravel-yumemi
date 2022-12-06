@@ -69,7 +69,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
@@ -80,7 +80,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
@@ -108,7 +108,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
