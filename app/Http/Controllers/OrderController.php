@@ -25,7 +25,7 @@ class OrderController extends Controller
                         'option_name' => 'mayonnaise',
                     ],
                     'amount' => 2,
-                    'delivered_at' => NULL,
+                    'delivered_at' => null,
                 ]
             ]
         ];
