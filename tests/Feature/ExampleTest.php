@@ -18,4 +18,20 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function test_making_an_api_request()
+    {
+        $response = $this->postJson('/api/user', ['name' => 'Sally']);
+
+        $response
+            ->assertStatus(201)
+            ->assertJson([
+                'created'=>true,
+                ]);
+    }
 }
