@@ -23,7 +23,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return 'Welcome';
+        $result = [
+            "response" => "Welcome",
+        ];
+
+        return response()->json($result);
     }
 
     /**

@@ -25,7 +25,7 @@ class ItemController extends Controller
                 'category_id' => 1
             ],
         ];
-        return view('item.index', compact('result'));
+        return response()->json($result);
     }
 
     /**

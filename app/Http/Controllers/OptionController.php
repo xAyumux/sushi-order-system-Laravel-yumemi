@@ -19,7 +19,7 @@ class OptionController extends Controller
                 ['name' => 'チリソース'],
             ],
         ];
-        return view('option.index', compact('result'));
+        return response()->json($result);
     }
 
     /**

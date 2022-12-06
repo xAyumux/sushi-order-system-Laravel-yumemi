@@ -20,7 +20,7 @@ class CategoryController extends Controller
                 ['name' => 'ra-men'],
             ],
         ];
-        return view('category.index', compact('result'));
+        return response()->json($result);
     }
 
     /**
@@ -60,7 +60,7 @@ class CategoryController extends Controller
                 ['name' => 'sake'],
             ],
         ];
-        return view('category.items', compact('result'));
+        return response()->json($result);
     }
 
     /**

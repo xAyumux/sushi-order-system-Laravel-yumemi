@@ -30,7 +30,7 @@ class OrderController extends Controller
             ]
         ];
 
-        return view('order.index', compact('result'));
+        return response()->json($result);
     }
 
     /**
@@ -40,7 +40,11 @@ class OrderController extends Controller
      */
     public function indexUncompleted()
     {
-        return 'Get uncompleted order';
+        $result = [
+            'response' => 'Get uncompleted order',
+        ];
+
+        return response()->json($result);
     }
 
     /**
@@ -50,7 +54,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return 'Create new order';
+        $result = [
+            'response' => 'Create new order',
+        ];
+
+        return response()->json($result);
     }
 
     /**
@@ -83,7 +91,12 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return 'Complete order ' . $id;
+        $result = [
+            'id' => $id,
+            'response' => 'Complete order' . $id,
+        ];
+
+        return response()->json($result);
     }
 
     /**
@@ -106,6 +119,11 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        return 'Destroy order ' . $id;
+        $result = [
+            'id' => $id,
+            'response' => 'Destroy order' . $id,
+        ];
+
+        return response()->json($result);
     }
 }
