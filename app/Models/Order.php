@@ -17,4 +17,6 @@ class Order extends Model
     protected $primaryKey = 'order_id';
 
     public const CREATED_AT = 'ordered_at';
+
+    protected $guarded = ['order_id'];
 }

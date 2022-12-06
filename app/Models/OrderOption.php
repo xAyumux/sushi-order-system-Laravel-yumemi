@@ -15,4 +15,6 @@ class OrderOption extends Model
      * @var string
      */
     protected $primaryKey = 'order_option_id';
+
+    protected $guarded = ['order_option_id'];
 }

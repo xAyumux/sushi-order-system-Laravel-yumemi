@@ -15,4 +15,6 @@ class OptionCategory extends Model
      * @var string
      */
     protected $primaryKey = 'option_category_id';
+
+    protected $guarded = ['option_category_id'];
 }

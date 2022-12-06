@@ -15,4 +15,6 @@ class Category extends Model
      * @var string
      */
     protected $primaryKey = 'category_id';
+
+    protected $guarded = ['category_id'];
 }

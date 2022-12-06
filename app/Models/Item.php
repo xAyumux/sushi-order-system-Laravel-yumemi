@@ -15,4 +15,6 @@ class Item extends Model
      * @var string
      */
     protected $primaryKey = 'item_id';
+
+    protected $guarded = ['item_id'];
 }

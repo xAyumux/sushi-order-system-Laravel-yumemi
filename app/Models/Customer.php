@@ -15,4 +15,6 @@ class Customer extends Model
      * @var string
      */
     protected $primaryKey = 'customer_id';
+
+    protected $guarded = ['customer_id'];
 }
