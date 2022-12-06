@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PriceHistory extends Model
 {
+    use HasFactory;
+
     /**
      * The primary key associated with the table.
      *
@@ -14,7 +16,5 @@ class PriceHistory extends Model
      */
     protected $primaryKey = 'price_history_id';
 
-    const CREATED_AT = 'configured_at';
-
-    use HasFactory;
+    public const CREATED_AT = 'configured_at';
 }

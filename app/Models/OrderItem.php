@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
+    use HasFactory;
+
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $primaryKey = 'order_item_id';
-
-    use HasFactory;
 }

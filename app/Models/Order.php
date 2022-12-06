@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use HasFactory;
+
     /**
      * The primary key associated with the table.
      *
@@ -14,7 +16,5 @@ class Order extends Model
      */
     protected $primaryKey = 'order_id';
 
-    const CREATED_AT = 'ordered_at';
-
-    use HasFactory;
+    public const CREATED_AT = 'ordered_at';
 }

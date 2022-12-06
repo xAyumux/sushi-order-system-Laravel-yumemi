@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    use HasFactory;
+
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $primaryKey = 'item_id';
-
-    use HasFactory;
 }

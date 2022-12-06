@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class OptionCategory extends Model
 {
+    use HasFactory;
+
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
     protected $primaryKey = 'option_category_id';
-
-    use HasFactory;
 }
