@@ -31,7 +31,59 @@ class ExampleTest extends TestCase
         $response
             ->assertStatus(201)
             ->assertJson([
-                'created'=>true,
-                ]);
+                'created' => true,
+            ]);
+    }
+
+    /**
+     * 基本的な機能テストの例
+     *
+     * @return void
+     */
+    public function test_fluent_json()
+    {
+        $response = $this->getJson('/users/1');
+
+        $response
+            ->assertJson(
+                fn (AssertableJson $json) =>
+                $json->where('id', 1)
+                    ->where('name', 'Victoria Faith')
+                    ->whereNot('status', 'pending')
+                    ->has('data')
+                    ->hasAll(['message', 'code'])
+                    ->missing('password')
+                    ->etc()
+            );
+
+        $response
+            ->assertJson(
+                fn (AssertableJson $json) =>
+                $json->has('meta')
+                    ->has('users', 3)
+                    ->has(
+                        'users.0',
+                        fn ($json) =>
+                        $json->where('id', 1)
+                            ->where('name', 'Victoria Faith')
+                            ->missing('password')
+                            ->etc()
+                    )
+            );
+
+        $response->assertJson(
+            fn (AssertableJson $json) =>
+            $json->whereType('id', 'integer')
+                ->whereAllType([
+                    'users.0.name' => 'string',
+                    'meta' => 'array'
+                ])
+        );
+
+        $response->assertJson(
+            fn (AssertableJson $json) =>
+            $json->whereType('name', 'string|null')
+                ->whereType('id', ['string', 'integer'])
+        );
     }
 }
