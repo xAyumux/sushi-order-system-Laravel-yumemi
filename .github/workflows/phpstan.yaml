@@ -1,4 +1,4 @@
-name: larastan
+name: larastan and PHP-CS-Fixer
 
 on:
   pull_request:
@@ -17,5 +17,7 @@ jobs:
         tools: composer:v2
     - name: Resolve dependencies
       run: composer install --no-progress --prefer-dist --optimize-autoloader
+    - name: Dry Run PHP-CS-Fixer
+      run: ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose --dry-run
     - name: Run larastan
-      run: ./vendor/bin/phpstan analyse --memory-limit=2G --configuration=phpstan.neon
+      run: ./vendor/bin/phpstan analyse --memory-limit=2G --configuration=phpstan.neon.dist
