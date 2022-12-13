@@ -27,6 +27,6 @@ class OrderOption extends Model
 
     public function option()
     {
-        return $this->belongsTo(OrderOption::class);
+        return $this->belongsTo(Option::class);
     }
 }
