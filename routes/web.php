@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-
 use App\Http\Controllers\ItemController;
+
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
