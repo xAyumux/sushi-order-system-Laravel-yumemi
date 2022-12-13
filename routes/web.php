@@ -2,8 +2,14 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,52 +26,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/greeting', function () {
-    return view('greeting', ['name' => 'John Doe']);
-});
+Route::post('/customers', [CustomerController::class, 'create']);
 
-Route::post('/customers', function () {
-    return 'Welcome';
-});
+Route::post('/order-items', [OrderController::class, 'create']);
 
-Route::post('/order-items', function (Request $request) {
-    return 'Ordered';
-});
+Route::get('/orders', [OrderController::class, 'index']);
 
-Route::get('/orders', function () {
-    return 'Get your orders';
-});
+Route::get('/items', [ItemController::class, 'index']);
 
-Route::get('/items', function () {
-    return 'Get items';
-});
+Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories', function () {
-    return 'Get categories';
-});
+Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
 
-Route::get('/categories/{category_id}/items', function ($category_id) {
-    return response()->json([
-        'categories' => [
-            ['name' => 'sushi'],
-            ['name' => 'donburi'],
-            ['name' => 'ra-men'],
-        ],
-    ]);
-});
+Route::get('/options', [OptionController::class, 'index']);
 
-Route::get('/options', function () {
-    return 'Get options';
-});
+Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
 
-Route::delete('/orders/{order_id}/delete-order', function ($order_id) {
-    return 'Delete order';
-});
+Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']);
 
-Route::get('/orders/uncompleted-order', function () {
-    return 'Get uncompleted order';
-});
-
-Route::patch('/orders/{order_id}/complete-order', function ($order_id) {
-    return 'Complete order';
-});
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'edit']);
