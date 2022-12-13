@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
             $table->integer('total_price');
-            $table->timestamp('ordered_at');
-            $table->timestamps();
+            $table->timestamp('ordered_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
 
