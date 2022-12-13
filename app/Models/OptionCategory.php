@@ -19,4 +19,9 @@ class OptionCategory extends Model
     protected $primaryKey = 'option_category_id';
 
     protected $guarded = ['option_category_id'];
+
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
 }

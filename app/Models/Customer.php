@@ -19,4 +19,9 @@ class Customer extends Model
     protected $primaryKey = 'customer_id';
 
     protected $guarded = ['customer_id'];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

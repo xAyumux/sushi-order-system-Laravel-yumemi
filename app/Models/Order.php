@@ -19,6 +19,17 @@ class Order extends Model
     protected $primaryKey = 'order_id';
 
     public const CREATED_AT = 'ordered_at';
+    public const UPDATED_AT = 'delivered_at';
 
     protected $guarded = ['order_id'];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

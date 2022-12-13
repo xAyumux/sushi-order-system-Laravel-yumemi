@@ -19,4 +19,9 @@ class Category extends Model
     protected $primaryKey = 'category_id';
 
     protected $guarded = ['category_id'];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

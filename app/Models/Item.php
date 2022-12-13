@@ -19,4 +19,19 @@ class Item extends Model
     protected $primaryKey = 'item_id';
 
     protected $guarded = ['item_id'];
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function price_history()
+    {
+        return $this->belongsTo(PriceHistory::class);
+    }
 }

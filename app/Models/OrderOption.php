@@ -19,4 +19,14 @@ class OrderOption extends Model
     protected $primaryKey = 'order_option_id';
 
     protected $guarded = ['order_option_id'];
+
+    public function order_item()
+    {
+        return $this->belongsTo(OrderItem::class);
+    }
+
+    public function option()
+    {
+        return $this->belongsTo(OrderOption::class);
+    }
 }

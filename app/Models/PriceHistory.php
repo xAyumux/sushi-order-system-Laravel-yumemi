@@ -21,4 +21,9 @@ class PriceHistory extends Model
     public const CREATED_AT = 'configured_at';
 
     protected $guarded = ['price_history_id'];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }
