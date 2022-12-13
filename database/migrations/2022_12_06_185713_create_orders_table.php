@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id('order_id');
             $table->integer('total_price');
             $table->timestamp('ordered_at')->useCurrent()->nullable();
-            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('delivered_at')->useCurrent()->nullable();
         });
     }
 
