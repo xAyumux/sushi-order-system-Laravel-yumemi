@@ -21,7 +21,7 @@ class Order extends Model
     public const CREATED_AT = 'ordered_at';
     public const UPDATED_AT = 'delivered_at';
 
-    protected $guarded = ['order_id'];
+    protected $guarded = ['order_id', 'ordered_at', 'delivered_at'];
 
     public function customer()
     {

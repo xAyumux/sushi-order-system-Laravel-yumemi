@@ -18,7 +18,7 @@ class OptionCategory extends Model
      */
     protected $primaryKey = 'option_category_id';
 
-    protected $guarded = ['option_category_id'];
+    protected $guarded = ['option_category_id', 'created_at', 'updated_at'];
 
     public function options()
     {

@@ -18,7 +18,7 @@ class Category extends Model
      */
     protected $primaryKey = 'category_id';
 
-    protected $guarded = ['category_id'];
+    protected $guarded = ['category_id', 'created_at', 'updated_at'];
 
     public function items()
     {

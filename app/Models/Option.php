@@ -18,7 +18,7 @@ class Option extends Model
      */
     protected $primaryKey = 'option_id';
 
-    protected $guarded = ['option_id'];
+    protected $guarded = ['option_id', 'created_at', 'updated_at'];
 
     public function orderOptions()
     {

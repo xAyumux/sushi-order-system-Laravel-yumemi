@@ -20,7 +20,7 @@ class PriceHistory extends Model
 
     public const CREATED_AT = 'configured_at';
 
-    protected $guarded = ['price_history_id'];
+    protected $guarded = ['price_history_id', 'configured_at', 'updated_at'];
 
     public function items()
     {
