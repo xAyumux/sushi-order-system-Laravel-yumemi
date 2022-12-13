@@ -20,7 +20,7 @@ class OrderOption extends Model
 
     protected $guarded = ['order_option_id'];
 
-    public function order_item()
+    public function orderItem()
     {
         return $this->belongsTo(OrderItem::class);
     }

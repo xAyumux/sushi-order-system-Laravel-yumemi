@@ -20,7 +20,7 @@ class Item extends Model
 
     protected $guarded = ['item_id'];
 
-    public function order_items()
+    public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
     }
@@ -30,7 +30,7 @@ class Item extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function price_history()
+    public function priceHistory()
     {
         return $this->belongsTo(PriceHistory::class);
     }

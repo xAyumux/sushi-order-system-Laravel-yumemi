@@ -20,12 +20,12 @@ class Option extends Model
 
     protected $guarded = ['option_id'];
 
-    public function order_options()
+    public function orderOptions()
     {
         return $this->hasMany(OrderOption::class);
     }
 
-    public function option_category()
+    public function optionCategory()
     {
         return $this->belongsTo(OptionCategory::class);
     }
