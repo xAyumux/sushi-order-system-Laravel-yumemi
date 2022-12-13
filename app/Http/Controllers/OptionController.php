@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-final class OptionController extends Controller
+class OptionController extends Controller
 {
     /**
      * Display a listing of the resource.
