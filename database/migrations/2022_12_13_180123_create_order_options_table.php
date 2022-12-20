@@ -17,7 +17,8 @@ return new class extends Migration
     {
         Schema::create('order_options', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             $table->foreignId('order_item_id')->constrained();
             $table->foreignId('option_id')->constrained();

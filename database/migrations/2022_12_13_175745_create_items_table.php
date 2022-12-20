@@ -18,7 +18,8 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             $table->foreignId('category_id')->constrained();
             $table->foreignId('price_history_id')->constrained();

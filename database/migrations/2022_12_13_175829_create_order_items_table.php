@@ -19,7 +19,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('price');
             $table->unsignedInteger('amount');
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             $table->foreignId('order_id')->constrained();
             $table->foreignId('item_id')->constrained();

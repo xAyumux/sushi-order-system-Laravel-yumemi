@@ -18,7 +18,8 @@ return new class extends Migration
         Schema::create('options', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
 
             $table->foreignId('option_category_id')->constrained();
         });

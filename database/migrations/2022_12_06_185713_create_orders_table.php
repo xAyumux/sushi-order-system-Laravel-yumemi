@@ -18,8 +18,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('total_price');
-            $table->timestamp('ordered_at')->useCurrent()->nullable();
-            $table->timestamp('delivered_at')->useCurrent()->nullable();
+            // $table->timestamp('ordered_at')->useCurrent()->nullable();
+            // $table->timestamp('delivered_at')->useCurrent()->nullable();
+            $table->dateTime('ordered_at');
+            $table->dateTime('delivered_at');
 
             $table->foreignId('customer_id')->constrained();
         });

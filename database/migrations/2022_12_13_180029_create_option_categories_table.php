@@ -18,7 +18,8 @@ return new class extends Migration
         Schema::create('option_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at');
         });
     }
 
