@@ -11,13 +11,6 @@ class Item extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'item_id';
-
     protected $guarded = ['item_id', 'created_at', 'updated_at'];
 
     public function orderItems()

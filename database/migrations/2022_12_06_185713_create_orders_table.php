@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id('order_id');
+            $table->id();
             $table->unsignedInteger('total_price');
             $table->timestamp('ordered_at')->useCurrent()->nullable();
             $table->timestamp('delivered_at')->useCurrent()->nullable();

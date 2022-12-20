@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('option_categories', function (Blueprint $table) {
-            $table->id('option_category_id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
         });

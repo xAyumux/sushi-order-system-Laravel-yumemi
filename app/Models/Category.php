@@ -11,13 +11,6 @@ class Category extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'category_id';
-
     protected $guarded = ['category_id', 'created_at', 'updated_at'];
 
     public function items()

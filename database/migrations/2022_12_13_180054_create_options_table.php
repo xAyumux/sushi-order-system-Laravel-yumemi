@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('options', function (Blueprint $table) {
-            $table->id('option_id');
+            $table->id();
             $table->string('name');
             $table->timestamps();
 

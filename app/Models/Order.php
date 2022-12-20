@@ -11,13 +11,6 @@ class Order extends Model
 {
     use HasFactory;
 
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'order_id';
-
     public const CREATED_AT = 'ordered_at';
     public const UPDATED_AT = 'delivered_at';
 

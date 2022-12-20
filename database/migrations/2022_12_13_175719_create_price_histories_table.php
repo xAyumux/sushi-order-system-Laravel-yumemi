@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('price_histories', function (Blueprint $table) {
-            $table->id('price_history_id');
+            $table->id();
             $table->unsignedInteger('price');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('configured_at')->useCurrent()->nullable();
