@@ -11,8 +11,6 @@ class PriceHistory extends Model
 {
     use HasFactory;
 
-    public const CREATED_AT = 'configured_at';
-
     protected $guarded = ['price_history_id', 'configured_at', 'updated_at'];
 
     public function items()

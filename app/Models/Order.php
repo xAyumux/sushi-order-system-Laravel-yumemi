@@ -11,9 +11,6 @@ class Order extends Model
 {
     use HasFactory;
 
-    public const CREATED_AT = 'ordered_at';
-    public const UPDATED_AT = 'delivered_at';
-
     protected $guarded = ['order_id', 'ordered_at', 'delivered_at'];
 
     public function customer()
