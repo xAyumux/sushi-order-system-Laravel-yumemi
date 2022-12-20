@@ -25,11 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $result = [
-            "response" => "Welcome",
-        ];
-
-        return response()->json($result);
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
@@ -40,7 +36,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(['message' => 'Not Implemented.'], 501);
+        $result = [
+            "response" => "Welcome",
+        ];
+
+        return response()->json($result);
     }
 
     /**

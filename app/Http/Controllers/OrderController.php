@@ -56,11 +56,7 @@ final class OrderController extends Controller
      */
     public function create()
     {
-        $result = [
-            'response' => 'Create new order',
-        ];
-
-        return response()->json($result);
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
@@ -71,7 +67,11 @@ final class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json(['message' => 'Not Implemented.'], 501);
+        $result = [
+            'response' => 'Create new order',
+        ];
+
+        return response()->json($result);
     }
 
     /**
@@ -93,12 +93,7 @@ final class OrderController extends Controller
      */
     public function edit($id)
     {
-        $result = [
-            'id' => $id,
-            'response' => 'Complete order' . $id,
-        ];
-
-        return response()->json($result);
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
@@ -110,7 +105,12 @@ final class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json(['message' => 'Not Implemented.'], 501);
+        $result = [
+            'id' => $id,
+            'response' => 'Complete order' . $id,
+        ];
+
+        return response()->json($result);
     }
 
     /**
