@@ -62,10 +62,10 @@ final class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\OrderRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
         $result = [
             'response' => 'Create new order',
@@ -99,11 +99,11 @@ final class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\CompleteOrderRequest $request
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(CompleteOrderRequest $request, $id)
     {
         $result = [
             'id' => $id,
