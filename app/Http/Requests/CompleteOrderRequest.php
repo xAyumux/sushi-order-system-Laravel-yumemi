@@ -15,7 +15,9 @@ class CompleteOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // Check if the user is authorized to make this request.
+        // user が店員かどうか確認が必要
+        return true;
     }
 
     /**

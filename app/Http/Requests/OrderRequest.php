@@ -15,7 +15,8 @@ class OrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // 客かどうかの確認が本来は必要
+        return true;
     }
 
     /**
@@ -26,7 +27,16 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_items' => 'required',
+            'table_number' => ['required', 'numeric', 'integer'],
+            'order_items' => ['required', 'array:order_id,item_id,price,amount'],
+            'order_items.*.order_id' => ['required', 'numeric', 'integer'],
+            'order_items.*.item_id' => ['required', 'numeric', 'integer'],
+            'order_items.*.price' => ['required', 'numeric', 'integer'],
+            'order_items.*.amount' => ['required', 'numeric', 'integer'],
+            'order_options' => ['required', 'array:order_item_id,option_id'],
+            'order_options.*.order_item_id' => ['required', 'numeric', 'integer'],
+            'order_options.*.option_id' => ['required', 'numeric', 'integer'],
+            'total_price' => ['required', 'numeric', 'integer'],
         ];
     }
 }
