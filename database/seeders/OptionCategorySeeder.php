@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OptionCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,16 @@ class OptionCategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        OptionCategory::create([
+            'name' => 'サビ',
+        ]);
+
+        OptionCategory::create([
+            'name' => 'サイズ',
+        ]);
+
+        OptionCategory::create([
+            'name' => 'トッピング',
+        ]);
     }
 }
