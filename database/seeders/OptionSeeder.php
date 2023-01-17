@@ -16,8 +16,8 @@ class OptionSeeder extends Seeder
      */
     public function run()
     {
-        $wasabi_id = OptionCategory::where('name', 'サビ')->first()->value('id');
-        $size_id = OptionCategory::where('name', 'サイズ')->first()->value('id');
+        $wasabi_id = OptionCategory::where('name', 'サビ')->value('id');
+        $size_id = OptionCategory::where('name', 'サイズ')->value('id');
 
         Option::create([
             'option_category_id' => $wasabi_id,

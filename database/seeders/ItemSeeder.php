@@ -17,10 +17,10 @@ class ItemSeeder extends Seeder
      */
     public function run()
     {
-        $sushi_id = Category::where('name', '寿司')->first()->value('id');
-        $sushi_price_id = PriceHistory::where('price', '200')->first()->value('id');
-        $drink_id = Category::where('name', 'ドリンク')->first()->value('id');
-        $drink_price_id = PriceHistory::where('price', '300')->first()->value('id');
+        $sushi_id = Category::where('name', '寿司')->value('id');
+        $sushi_price_id = PriceHistory::where('price', '200')->value('id');
+        $drink_id = Category::where('name', 'ドリンク')->value('id');
+        $drink_price_id = PriceHistory::where('price', '300')->value('id');
 
         Item::create([
             'category_id' => $sushi_id,
