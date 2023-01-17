@@ -25,9 +25,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/customers', [CustomerController::class, 'create']);
+Route::post('/customers', [CustomerController::class, 'store']);
 
-Route::post('/order-items', [OrderController::class, 'create']);
+Route::post('/order-items', [OrderController::class, 'store']);
 
 Route::get('/orders', [OrderController::class, 'index']);
 
@@ -43,4 +43,4 @@ Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destr
 
 Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']);
 
-Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'edit']);
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);

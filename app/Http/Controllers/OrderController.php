@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CompleteOrderRequest;
+use App\Http\Requests\OrderRequest;
 
 final class OrderController extends Controller
 {
@@ -56,22 +57,22 @@ final class OrderController extends Controller
      */
     public function create()
     {
-        $result = [
-            'response' => 'Create new order',
-        ];
-
-        return response()->json($result);
+        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\OrderRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        return response()->json(['message' => 'Not Implemented.'], 501);
+        $result = [
+            'response' => 'Create new order',
+        ];
+
+        return response()->json($result);
     }
 
     /**
@@ -93,24 +94,24 @@ final class OrderController extends Controller
      */
     public function edit($id)
     {
+        return response()->json(['message' => 'Not Implemented.'], 501);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \App\Http\Requests\CompleteOrderRequest $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(CompleteOrderRequest $request, $id)
+    {
         $result = [
             'id' => $id,
             'response' => 'Complete order' . $id,
         ];
 
         return response()->json($result);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, $id)
-    {
-        return response()->json(['message' => 'Not Implemented.'], 501);
     }
 
     /**

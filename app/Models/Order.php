@@ -11,7 +11,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['order_id', 'ordered_at', 'delivered_at'];
+    protected $guarded = ['id', 'created_at'];
 
     public function customer()
     {
