@@ -60,7 +60,7 @@ final class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\OrderRequest $request
+     * @param \App\Http\Requests\OrderRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(OrderRequest $request)
@@ -97,7 +97,7 @@ final class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\CompleteOrderRequest $request
+     * @param \App\Http\Requests\CompleteOrderRequest $request
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
