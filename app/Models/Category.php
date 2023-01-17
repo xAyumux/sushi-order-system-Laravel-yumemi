@@ -11,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['category_id', 'created_at', 'updated_at'];
+    protected $guarded = ['id', 'created_at'];
 
     public function items()
     {
