@@ -1,3 +1,54 @@
+# 外部用リコメンドシステム
+
+## 概要
+
+https://www.notion.so/yumemi/9ff424a7460240979790b436fcbe36eb の下部にに記載されている
+寿司リコメンデーションシステム「SUSYS」のモックを作成しました。
+
+Lambdaでデプロイしています。
+https://ap-northeast-1.console.aws.amazon.com/lambda/home?region=ap-northeast-1#/functions/sushi-recommend-FujiwaraOJTSushiRecommendFunction-ZQHa2jbfXBgp?tab=code
+
+コンソールを見るには https://sts.yumemi.co.jp/adfs/ls/IdpInitiatedSignOn.aspx でログインして `ADFS-Laboratory-Develop` のロールで入る必要がありますが、最悪コンソールに入らなくてもAPIは叩けます。
+
+
+## API利用方法
+
+リクエスト例
+```
+curl --location --request POST 'https://3thrfz1h40.execute-api.ap-northeast-1.amazonaws.com/Prod/recommended' \
+--header 'client-id: sushi_order_system' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "item_ids": [123, 234]
+}'
+```
+
+- 認証のためヘッダにclient-id `sushi_order_system` を指定してください
+- リクエストボディは `{"item_ids": [123, 234]}` の形式にしてください。
+  - `123` は任意のIDで良いですがintにしてください。
+  - 不正なID(sushi-order-systemのDBに入っていないネタなど)を入れても別に検知されません。
+
+
+
+# SAM 利用方法
+バグっていたり、SUSYSをいじりたくなったらlambdaのソースコードを変更しても構いません。
+その場合、変更を保存した後
+
+```
+$ sam build
+$ sam deploy
+```
+
+で反映されます。
+
+また、ローカルでlambdaの動きを確認したい場合は
+
+```
+$ sam local invoke "HelloWorldFunction" -e events/event.json
+```
+で行けます。events/event.jsonの `body` や `headers` を変更すると色々変わります。
+
+
 # sushi-recommend
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
