@@ -27,22 +27,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/customers', [CustomerController::class, 'store']);
+Route::post('/customers', [CustomerController::class, 'store']); // unimplemented
 
-Route::post('/order-items', [OrderController::class, 'store']);
+Route::post('/order-items', [OrderController::class, 'store']); // unimplemented
 
-Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders', [OrderController::class, 'index']); // unimplemented
 
-Route::get('/items', [ItemController::class, 'index']);
+Route::get('/items', [ItemController::class, 'index']); // unimplemented
 
-Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']); // unimplemented
 
-Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
+Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']); // unimplemented
 
-Route::get('/options', [OptionController::class, 'index']);
+Route::get('/options', [OptionController::class, 'index']); // unimplemented
 
-Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
+Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']); // unimplemented
 
-Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']);
+Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']); // unimplemented
 
-Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']); // unimplemented
