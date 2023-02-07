@@ -33,7 +33,7 @@ Route::post('/order-items', [OrderController::class, 'store']); // unimplemented
 
 Route::get('/orders', [OrderController::class, 'index']); // unimplemented
 
-Route::get('/items', [ItemController::class, 'index']); // unimplemented
+Route::get('/items', [ItemController::class, 'index']);
 
 Route::get('/categories', [CategoryController::class, 'index']); // unimplemented
 

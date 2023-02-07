@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -15,19 +16,14 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $result = [
-            [
-                'name' => 'maguro',
-                'price' => 200,
-                'category_id' => 1
-            ],
-            [
-                'name' => 'sake',
-                'price' => 200,
-                'category_id' => 1
-            ],
-        ];
-        return response()->json($result);
+        $items = Item::select('items.name', 'category_id', 'categories.name as category_name', 'price_history_id', 'price_histories.price')
+            ->join('categories', 'items.category_id', '=', 'categories.id')
+            ->join('price_histories', 'items.price_history_id', '=', 'price_histories.id')
+            ->orderBy('categories.id')
+            ->orderBy('price_histories.id')
+            ->get();
+
+        return response()->json($items);
     }
 
     /**
