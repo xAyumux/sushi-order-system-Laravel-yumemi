@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,14 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $result = [
-            'categories' => [
-                ['name' => 'sushi'],
-                ['name' => 'donburi'],
-                ['name' => 'ra-men'],
-            ],
-        ];
-        return response()->json($result);
+        $categories = Category::select('id', 'name')->get();
+
+        return response()->json($categories);
     }
 
     /**
@@ -52,17 +49,17 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($category_id)
     {
-        $result = [
-            'category_id' => $id,
-            'category_name' => '寿司',
-            'categories' => [
-                ['name' => 'maguro'],
-                ['name' => 'sake'],
-            ],
-        ];
-        return response()->json($result);
+        $items = Item::where('category_id', $category_id)
+            ->select('items.id', 'items.name', 'category_id', 'categories.name as category_name', 'price_history_id', 'price_histories.price')
+            ->join('categories', 'items.category_id', '=', 'categories.id')
+            ->join('price_histories', 'items.price_history_id', '=', 'price_histories.id')
+            ->orderBy('categories.id')
+            ->orderBy('price_histories.id')
+            ->get();
+
+        return response()->json($items);
     }
 
     /**

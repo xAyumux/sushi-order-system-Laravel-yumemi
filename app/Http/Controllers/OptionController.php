@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
@@ -15,13 +16,12 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $result = [
-            'options' => [
-                ['name' => 'マヨネーズ'],
-                ['name' => 'チリソース'],
-            ],
-        ];
-        return response()->json($result);
+        $options = Option::select('options.id', 'options.name', 'option_category_id', 'option_categories.name as option_category_name')
+            ->join('option_categories', 'option_category_id', '=', 'option_categories.id')
+            ->orderBy('option_category_id')
+            ->get();
+
+        return response()->json($options);
     }
 
     /**

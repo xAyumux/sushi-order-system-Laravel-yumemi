@@ -35,11 +35,11 @@ Route::get('/orders', [OrderController::class, 'index']); // unimplemented
 
 Route::get('/items', [ItemController::class, 'index']);
 
-Route::get('/categories', [CategoryController::class, 'index']); // unimplemented
+Route::get('/categories', [CategoryController::class, 'index']);
 
-Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']); // unimplemented
+Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
 
-Route::get('/options', [OptionController::class, 'index']); // unimplemented
+Route::get('/options', [OptionController::class, 'index']);
 
 Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']); // unimplemented
 
