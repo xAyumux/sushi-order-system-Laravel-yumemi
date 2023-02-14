@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('table_number');
             $table->unsignedInteger('total_price');
             $table->dateTime('ordered_at')->nullable();
             $table->dateTime('delivered_at')->nullable();
