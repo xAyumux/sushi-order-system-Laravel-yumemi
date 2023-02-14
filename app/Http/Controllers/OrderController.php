@@ -74,9 +74,9 @@ final class OrderController extends Controller
         $validated = $request->validated();
 
         $order = Order::create([
-            'customer_id' => $validated->customer_id,
-            'total_price' => $validated->total_price,
-            'table_number' => $validated->table_number,
+            'customer_id' => $validated['customer_id'],
+            'total_price' => $validated['total_price'],
+            'table_number' => $validated['table_number'],
         ]);
 
         foreach ($validated['order_items'] as $validated_item) {
@@ -102,7 +102,6 @@ final class OrderController extends Controller
 
         $result = [
             'response' => 'Create new order',
-            'request_data' => $request,
             'validated_data' => $validated,
         ];
 
