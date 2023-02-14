@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;  // 追加
+use Illuminate\Http\Exceptions\HttpResponseException;  // 追加
 
 class OrderRequest extends FormRequest
 {
@@ -27,14 +29,27 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
+            'customer_id' => ['required', 'integer'],
             'table_number' => ['required', 'integer'],
-            'order_items' => ['required', 'array:item_id,price,amount'],
+            'order_items' => ['required', 'array'],
             'order_items.*.item_id' => ['required', 'integer'],
             'order_items.*.price' => ['required', 'integer'],
             'order_items.*.amount' => ['required', 'integer'],
-            'order_options' => ['required', 'array:option_id'],
+            'order_options' => ['required', 'array'],
             'order_options.*.option_id' => ['required', 'integer'],
             'total_price' => ['required', 'integer'],
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $response['data']    = [];
+        $response['status']  = 'NG';
+        $response['summary'] = 'Failed validation.';
+        $response['errors']  = $validator->errors()->toArray();
+
+        throw new HttpResponseException(
+            response()->json($response, 422)
+        );
     }
 }
