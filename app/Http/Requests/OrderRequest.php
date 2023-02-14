@@ -27,13 +27,12 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'customer_id' => ['required', 'numeric', 'integer'],
-            'table_number' => ['required', 'numeric', 'integer'],
-            'order_items' => ['required', 'array:order_id,item_id,price,amount'],
+            'table_number' => ['required', 'integer'],
+            'order_items' => ['required', 'array:item_id,price,amount'],
             'order_items.*.item_id' => ['required', 'integer'],
             'order_items.*.price' => ['required', 'integer'],
             'order_items.*.amount' => ['required', 'integer'],
-            'order_options' => ['required', 'array:order_item_id,option_id'],
+            'order_options' => ['required', 'array:option_id'],
             'order_options.*.option_id' => ['required', 'integer'],
             'total_price' => ['required', 'integer'],
         ];
