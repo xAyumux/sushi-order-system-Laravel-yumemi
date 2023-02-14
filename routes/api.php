@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/customers', [CustomerController::class, 'store']);
 
-Route::post('/order-items', [OrderController::class, 'store']); // unimplemented
+Route::post('/order-items', [OrderController::class, 'store']);
 
 Route::get('/orders', [OrderController::class, 'index']); // unimplemented
 

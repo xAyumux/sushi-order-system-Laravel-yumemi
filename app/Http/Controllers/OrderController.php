@@ -71,19 +71,20 @@ final class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
-        $request = $request->validated();
+        $validated = $request->validated();
+
         $order = Order::create([
-            'customer_id' => $request->customer_id,
-            'total_price' => $request->total_price,
-            'table_number' => $request->table_number,
+            'customer_id' => $validated->customer_id,
+            'total_price' => $validated->total_price,
+            'table_number' => $validated->table_number,
         ]);
 
-        foreach ($request['order_items'] as $request_item) {
+        foreach ($validated['order_items'] as $validated_item) {
             $order_item = OrderItem::create([
                 'order_id' => $order->id,
-                'item_id' => $request_item['item_id'],
-                'price' => $request_item['price'],
-                'amount' => $request_item['amount'],
+                'item_id' => $validated_item['item_id'],
+                'price' => $validated_item['price'],
+                'amount' => $validated_item['amount'],
             ]);
 
             // $order_option = OrderOption::create([
@@ -92,15 +93,17 @@ final class OrderController extends Controller
             // ]);
         }
 
-        foreach ($request['order_options'] as $request_option) {
+        foreach ($validated['order_options'] as $validated_option) {
             $order_option = OrderOption::create([
                 'order_item_id' => $order_item->id,
-                'option_id' => $request_option['option_id'],
+                'option_id' => $validated_option['option_id'],
             ]);
         }
 
         $result = [
             'response' => 'Create new order',
+            'request_data' => $request,
+            'validated_data' => $validated,
         ];
 
         return response()->json($result);
