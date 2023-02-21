@@ -43,6 +43,6 @@ Route::get('/options', [OptionController::class, 'index']);
 
 Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
 
-Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']); // unimplemented
+Route::get('/orders/uncompleted-orders', [OrderController::class, 'indexUncompleted']);
 
-Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']); // unimplemented
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);

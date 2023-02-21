@@ -6,10 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CompleteOrderRequest;
 use App\Http\Requests\OrderRequest;
-use App\Models\Item;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderOption;
+use Carbon\Carbon;
 
 final class OrderController extends Controller
 {
@@ -26,16 +26,8 @@ final class OrderController extends Controller
             ->leftJoin('order_options', 'order_items.id', '=', 'order_options.order_item_id')
             ->leftJoin('options', 'order_options.option_id', '=', 'options.id')
             ->orderByDesc('orders.id')
+            ->orderByDesc('order_items.id')
             ->get();
-        // サブクエリ
-        // $order_items = OrderItem::select('id', 'price', 'amount');
-        // $items = Item::all();
-        // $order = Order::select('orders.id', 'table_number', 'total_price', 'order_items.price', 'order_items.amount', 'delivered_at')
-        //     ->joinSub($order_items, 'order_items', function ($join) {
-        //         $join->on('orders.id', '=', 'order_items.id');
-        //     })
-        //     ->orderByDesc('orders.id')
-        //     ->get();
 
         return response()->json($order);
     }
@@ -47,11 +39,17 @@ final class OrderController extends Controller
      */
     public function indexUncompleted()
     {
-        $result = [
-            'response' => 'Get uncompleted order',
-        ];
+        $order = Order::select('orders.id', 'table_number', 'total_price', 'order_items.price', 'order_items.amount', 'items.name as item_name', 'order_options.order_item_id', 'options.name as option_name', 'delivered_at')
+            ->rightJoin('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->leftJoin('items', 'order_items.item_id', '=', 'items.id')
+            ->leftJoin('order_options', 'order_items.id', '=', 'order_options.order_item_id')
+            ->leftJoin('options', 'order_options.option_id', '=', 'options.id')
+            ->whereNull('delivered_at')
+            ->orderByDesc('orders.id')
+            ->orderByDesc('order_items.id')
+            ->get();
 
-        return response()->json($result);
+        return response()->json($order);
     }
 
     /**
@@ -137,15 +135,26 @@ final class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\CompleteOrderRequest $request
-     * @param int $id
+     * @param int $order_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(CompleteOrderRequest $request, $id)
+    public function update(CompleteOrderRequest $request, $order_id)
     {
-        $result = [
-            'id' => $id,
-            'response' => 'Complete order' . $id,
-        ];
+        $order = Order::find($order_id);
+        if (null === $order->delivered_at) {
+            $order->delivered_at = Carbon::now();
+            $order->save();
+
+            $result = [
+                'id' => $order_id,
+                'response' => 'Complete order: ' . $order_id,
+            ];
+        } else {
+            $result = [
+                'id' => $order_id,
+                'response' => 'Already completed order: ' . $order_id,
+            ];
+        }
 
         return response()->json($result);
     }
