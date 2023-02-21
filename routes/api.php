@@ -41,7 +41,7 @@ Route::get('/categories/{category_id}/items', [CategoryController::class, 'show'
 
 Route::get('/options', [OptionController::class, 'index']);
 
-Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']); // unimplemented
+Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
 
 Route::get('/orders/uncompleted-order', [OrderController::class, 'indexUncompleted']); // unimplemented
 

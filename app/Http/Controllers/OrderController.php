@@ -158,6 +158,8 @@ final class OrderController extends Controller
      */
     public function destroy($order_id)
     {
+        Order::destroy($order_id);
+
         $result = [
             'id' => $order_id,
             'response' => 'Destroy order' . $order_id,
