@@ -15,7 +15,8 @@ class CustomerRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // 客かどうかの確認が本来は必要
+        return true;
     }
 
     /**
