@@ -86,20 +86,18 @@ final class OrderController extends Controller
                 'price' => $validated_item['price'],
                 'amount' => $validated_item['amount'],
             ]);
-
-            // $order_option = OrderOption::create([
-            //     'order_item_id' => $order_item->id,
-            //     'option_id' => $request['order_options']['option_id'],
-            // ]);
         }
 
-        // オーダーをする際に、"order_option_id"がどの"order_item_id"と関連しているかの判別が出来ていない
+        // Needs improvement オーダーをする際に、"order_option_id"がどの"order_item_id"と関連しているかの判別が出来ていない
         foreach ($validated['order_options'] as $validated_option) {
             $order_option = OrderOption::create([
                 'order_item_id' => $order_item->id,
                 'option_id' => $validated_option['option_id'],
             ]);
         }
+
+        // order_idが同じものをまとめて、レスポンスがネストされた状態にする
+        // eloquentコレクションを結合する
 
         $result = [
             'response' => 'Create new order',
