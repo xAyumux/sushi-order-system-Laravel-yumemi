@@ -81,6 +81,7 @@ final class OrderController extends Controller
         ]);
 
         foreach ($validated['order_items'] as $validated_item) {
+            global $order_item;
             $order_item = OrderItem::create([
                 'order_id' => $order->id,
                 'item_id' => $validated_item['item_id'],
@@ -94,6 +95,7 @@ final class OrderController extends Controller
             // ]);
         }
 
+        // オーダーをする際に、"order_option_id"がどの"order_item_id"と関連しているかの判別が出来ていない
         foreach ($validated['order_options'] as $validated_option) {
             $order_option = OrderOption::create([
                 'order_item_id' => $order_item->id,
