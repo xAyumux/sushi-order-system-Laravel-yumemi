@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
 
-            $table->foreignId('order_item_id')->constrained();
+            $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
             $table->foreignId('option_id')->constrained();
         });
     }
