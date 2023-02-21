@@ -80,8 +80,8 @@ final class OrderController extends Controller
             'table_number' => $validated['table_number'],
         ]);
 
+        global $order_item;
         foreach ($validated['order_items'] as $validated_item) {
-            global $order_item;
             $order_item = OrderItem::create([
                 'order_id' => $order->id,
                 'item_id' => $validated_item['item_id'],
@@ -153,14 +153,14 @@ final class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param int $order_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($order_id)
     {
         $result = [
-            'id' => $id,
-            'response' => 'Destroy order' . $id,
+            'id' => $order_id,
+            'response' => 'Destroy order' . $order_id,
         ];
 
         return response()->json($result);
