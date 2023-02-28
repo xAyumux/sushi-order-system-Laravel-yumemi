@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Item;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name')->get();
+        $categories = CategoryRepository::getCategories();
 
         return response()->json($categories);
     }
@@ -51,13 +50,7 @@ class CategoryController extends Controller
      */
     public function show($category_id)
     {
-        $items = Item::where('category_id', $category_id)
-            ->select('items.id', 'items.name', 'category_id', 'categories.name as category_name', 'price_history_id', 'price_histories.price')
-            ->join('categories', 'items.category_id', '=', 'categories.id')
-            ->join('price_histories', 'items.price_history_id', '=', 'price_histories.id')
-            ->orderBy('categories.id')
-            ->orderBy('price_histories.id')
-            ->get();
+        $items = CategoryRepository::getCategoryItems($category_id);
 
         return response()->json($items);
     }

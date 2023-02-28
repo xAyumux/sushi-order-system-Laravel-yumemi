@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Option;
+use App\Repositories\OptionRepository;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
@@ -16,10 +16,7 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $options = Option::select('options.id', 'options.name', 'option_category_id', 'option_categories.name as option_category_name')
-            ->join('option_categories', 'option_category_id', '=', 'option_categories.id')
-            ->orderBy('option_category_id')
-            ->get();
+        $options = OptionRepository::getOptions();
 
         return response()->json($options);
     }
