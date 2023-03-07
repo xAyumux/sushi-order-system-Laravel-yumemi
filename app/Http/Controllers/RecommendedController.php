@@ -14,7 +14,7 @@ class RecommendedController extends Controller
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Http\Client\Response
      */
     public function __invoke(Request $request)
     {
@@ -25,6 +25,7 @@ class RecommendedController extends Controller
             ->orderByDesc('id')
             ->get();
 
+        //TODO filterを使い、category_idが寿司の物だけを抽出する
         $order_items = $order_items->map(function ($order_item) {
             return $order_item->item_id;
         });
