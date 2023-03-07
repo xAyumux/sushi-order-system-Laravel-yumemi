@@ -2,6 +2,13 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ItemController;
+
+use App\Http\Controllers\OptionController;
+use App\Http\Controllers\OrderController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +26,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/customers', [CustomerController::class, 'store']);
+
+Route::post('/order-items', [OrderController::class, 'store']); // Needs improvement
+
+Route::get('/orders', [OrderController::class, 'index']);
+
+Route::get('/items', [ItemController::class, 'index']);
+
+Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::get('/categories/{category_id}/items', [CategoryController::class, 'show']);
+
+Route::get('/options', [OptionController::class, 'index']);
+
+Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
+
+Route::get('/orders/uncompleted-orders', [OrderController::class, 'indexUncompleted']);
+
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);

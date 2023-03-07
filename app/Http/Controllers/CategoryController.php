@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,14 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $result = [
-            'categories' => [
-                ['name' => 'sushi'],
-                ['name' => 'donburi'],
-                ['name' => 'ra-men'],
-            ],
-        ];
-        return response()->json($result);
+        $categories = CategoryRepository::getCategories();
+
+        return response()->json($categories);
     }
 
     /**
@@ -49,20 +45,14 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param int $category_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show($category_id)
     {
-        $result = [
-            'category_id' => $id,
-            'category_name' => '寿司',
-            'categories' => [
-                ['name' => 'maguro'],
-                ['name' => 'sake'],
-            ],
-        ];
-        return response()->json($result);
+        $items = CategoryRepository::getCategoryItems($category_id);
+
+        return response()->json($items);
     }
 
     /**

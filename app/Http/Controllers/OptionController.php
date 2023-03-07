@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\OptionRepository;
 use Illuminate\Http\Request;
 
 class OptionController extends Controller
@@ -15,13 +16,9 @@ class OptionController extends Controller
      */
     public function index()
     {
-        $result = [
-            'options' => [
-                ['name' => 'マヨネーズ'],
-                ['name' => 'チリソース'],
-            ],
-        ];
-        return response()->json($result);
+        $options = OptionRepository::getOptions();
+
+        return response()->json($options);
     }
 
     /**

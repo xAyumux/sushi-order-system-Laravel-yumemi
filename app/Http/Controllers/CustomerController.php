@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CustomerRepository;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -36,8 +37,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $customer = CustomerRepository::saveCustomer();
+
         $result = [
             "response" => "Welcome",
+            "customer" => $customer,
         ];
 
         return response()->json($result);

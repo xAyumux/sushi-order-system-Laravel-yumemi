@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CompleteOrderRequest;
 use App\Http\Requests\OrderRequest;
+use App\Repositories\OrderRepository;
 
 final class OrderController extends Controller
 {
@@ -16,24 +17,11 @@ final class OrderController extends Controller
      */
     public function index()
     {
-        $result = [
-            [
-                'table_number' => 1,
-                'order_items' => [
-                    'item_id' => 1,
-                    'name' => 'maguro',
-                    'price' => 200,
-                    'order_options' => [
-                        'option_id' => 1,
-                        'option_name' => 'mayonnaise',
-                    ],
-                    'amount' => 2,
-                    'delivered_at' => null,
-                ]
-            ]
-        ];
+        $orders = OrderRepository::getOrders();
+        // order_idが同じものをまとめて、レスポンスがネストされた状態にする
+        // eloquentコレクションを結合する
 
-        return response()->json($result);
+        return response()->json($orders);
     }
 
     /**
@@ -43,11 +31,11 @@ final class OrderController extends Controller
      */
     public function indexUncompleted()
     {
-        $result = [
-            'response' => 'Get uncompleted order',
-        ];
+        $orders = OrderRepository::getUncompletedOrders();
+        // order_idが同じものをまとめて、レスポンスがネストされた状態にする
+        // eloquentコレクションを結合する
 
-        return response()->json($result);
+        return response()->json($orders);
     }
 
     /**
@@ -68,8 +56,12 @@ final class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
+        $validated = $request->validated();
+        OrderRepository::saveOrder($validated);
+
         $result = [
             'response' => 'Create new order',
+            'validated_data' => $validated,
         ];
 
         return response()->json($result);
@@ -101,15 +93,12 @@ final class OrderController extends Controller
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\CompleteOrderRequest $request
-     * @param int $id
+     * @param int $order_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(CompleteOrderRequest $request, $id)
+    public function update(CompleteOrderRequest $request, $order_id)
     {
-        $result = [
-            'id' => $id,
-            'response' => 'Complete order' . $id,
-        ];
+        $result = OrderRepository::completedOrder($order_id);
 
         return response()->json($result);
     }
@@ -117,14 +106,16 @@ final class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param int $order_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($order_id)
     {
+        OrderRepository::dropOrder($order_id);
+
         $result = [
-            'id' => $id,
-            'response' => 'Destroy order' . $id,
+            'id' => $order_id,
+            'response' => 'Destroy order' . $order_id,
         ];
 
         return response()->json($result);

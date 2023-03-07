@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ItemRepository;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -15,19 +16,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $result = [
-            [
-                'name' => 'maguro',
-                'price' => 200,
-                'category_id' => 1
-            ],
-            [
-                'name' => 'sake',
-                'price' => 200,
-                'category_id' => 1
-            ],
-        ];
-        return response()->json($result);
+        $items = ItemRepository::getItems();
+
+        return response()->json($items);
     }
 
     /**
