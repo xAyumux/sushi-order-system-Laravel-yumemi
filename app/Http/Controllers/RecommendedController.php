@@ -18,18 +18,21 @@ class RecommendedController extends Controller
     {
         $sushi_recommended_system = 'https://3thrfz1h40.execute-api.ap-northeast-1.amazonaws.com/Prod/recommended';
         $client_header = 'sushi_order_system';
-        // ItemRepository/getOrderItems()->item_id で履歴を取得
+
         $order_items = OrderItem::select('item_id')
             ->orderByDesc('id')
             ->get();
-        // json化
+
+        $order_items = $order_items->map(function ($order_item) {
+            return $order_item->item_id;
+        });
 
         $response = Http::acceptJson()
             ->withHeaders([
                 'client-id' => $client_header,
             ])
             ->post($sushi_recommended_system, [
-                'item_ids' => [123, 234],
+                'item_ids' => $order_items,
             ]);
 
         return $response;
