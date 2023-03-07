@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\OrderItem;
+use App\Repositories\CategoryRepository;
+use App\Repositories\OrderItemRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -21,21 +22,21 @@ class RecommendedController extends Controller
         $sushi_recommended_system = 'https://3thrfz1h40.execute-api.ap-northeast-1.amazonaws.com/Prod/recommended';
         $client_header = 'sushi_order_system';
 
-        $order_items = OrderItem::select('item_id')
-            ->orderByDesc('id')
-            ->get();
+        $purchase_histories = OrderItemRepository::getPurchaseHistories();
+        $sushi_category = CategoryRepository::getCategoryId('寿司');
 
-        //TODO filterを使い、category_idが寿司の物だけを抽出する
-        $order_items = $order_items->map(function ($order_item) {
-            return $order_item->item_id;
-        });
+        $purchase_histories = $purchase_histories
+            ->where('category_id', $sushi_category->id)
+            ->map(function ($order_item) {
+                return $order_item->item_id;
+            });
 
         $response = Http::acceptJson()
             ->withHeaders([
                 'client-id' => $client_header,
             ])
             ->post($sushi_recommended_system, [
-                'item_ids' => $order_items,
+                'item_ids' => $purchase_histories,
             ]);
 
         return $response;
