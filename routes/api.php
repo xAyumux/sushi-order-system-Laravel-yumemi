@@ -41,10 +41,10 @@ Route::get('/categories/{category_id}/items', [CategoryController::class, 'show'
 
 Route::get('/options', [OptionController::class, 'index']);
 
-Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy']);
+Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destroy'])->middleware(['verified.client_id']);
 
-Route::get('/orders/uncompleted-orders', [OrderController::class, 'indexUncompleted']);
+Route::get('/orders/uncompleted-orders', [OrderController::class, 'indexUncompleted'])->middleware(['verified.client_id']);
 
-Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);
+Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update'])->middleware(['verified.client_id']);
 
 Route::get('/recommended', RecommendedController::class);
