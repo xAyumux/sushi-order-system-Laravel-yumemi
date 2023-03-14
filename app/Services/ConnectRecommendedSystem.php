@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Http;
 
 class ConnectRecommendedSystem
 {
-    private const SUSHI_RECOMMENDED_SYSTEM = 'https://3thrfz1h40.execute-api.ap-northeast-1.amazonaws.com/Prod/recommended';
-
     public static function connect(string $client_header, array $request_body)
     {
+        $sushi_recommended_system = config('sushi_order_system.sushi_recommended_system');
+
         $response = Http::acceptJson()
             ->withHeaders([
                 'client-id' => $client_header,
             ])
-            ->post(self::SUSHI_RECOMMENDED_SYSTEM, [
+            ->post($sushi_recommended_system, [
                 'item_ids' => $request_body,
             ]);
 

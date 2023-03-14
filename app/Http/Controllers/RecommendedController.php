@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class RecommendedController extends Controller
 {
-    private const CLIENT_HEADER = 'sushi_order_system';
     private const SEARCH_CATEGORY_ID = '寿司';
 
     /**
@@ -22,6 +21,8 @@ class RecommendedController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $client_header = config('sushi_order_system.client_header');
+
         $purchase_histories = OrderItemRepository::getPurchaseHistories();
         $sushi_category = CategoryRepository::getCategoryId(self::SEARCH_CATEGORY_ID);
 
@@ -31,7 +32,7 @@ class RecommendedController extends Controller
                 return $order_item->item_id;
             });
 
-        $response = ConnectRecommendedSystem::connect(self::CLIENT_HEADER, $purchase_histories->toArray());
+        $response = ConnectRecommendedSystem::connect($client_header, $purchase_histories->toArray());
 
         return $response;
     }
