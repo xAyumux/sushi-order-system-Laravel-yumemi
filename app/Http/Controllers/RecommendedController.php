@@ -6,11 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CategoryRepository;
 use App\Repositories\OrderItemRepository;
+use App\Services\ConnectRecommendedSystem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class RecommendedController extends Controller
 {
+    private const CLIENT_HEADER = 'sushi_order_system';
+    private const SEARCH_CATEGORY_ID = '寿司';
+
     /**
      * Handle the incoming request.
      *
@@ -19,11 +22,8 @@ class RecommendedController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $sushi_recommended_system = 'https://3thrfz1h40.execute-api.ap-northeast-1.amazonaws.com/Prod/recommended';
-        $client_header = 'sushi_order_system';
-
         $purchase_histories = OrderItemRepository::getPurchaseHistories();
-        $sushi_category = CategoryRepository::getCategoryId('寿司');
+        $sushi_category = CategoryRepository::getCategoryId(self::SEARCH_CATEGORY_ID);
 
         $purchase_histories = $purchase_histories
             ->where('category_id', $sushi_category->id)
@@ -31,13 +31,7 @@ class RecommendedController extends Controller
                 return $order_item->item_id;
             });
 
-        $response = Http::acceptJson()
-            ->withHeaders([
-                'client-id' => $client_header,
-            ])
-            ->post($sushi_recommended_system, [
-                'item_ids' => $purchase_histories,
-            ]);
+        $response = ConnectRecommendedSystem::connect(self::CLIENT_HEADER, $purchase_histories->toArray());
 
         return $response;
     }
