@@ -28,4 +28,10 @@ class CategoryRepository
 
         return $items;
     }
+
+    public static function getCategoryId(string $category_name)
+    {
+        $sushi_category = Category::where('name', $category_name)->first();
+        return $sushi_category;
+    }
 }

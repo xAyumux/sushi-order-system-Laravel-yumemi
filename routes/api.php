@@ -8,7 +8,7 @@ use App\Http\Controllers\ItemController;
 
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\OrderController;
-
+use App\Http\Controllers\RecommendedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,3 +46,5 @@ Route::delete('/orders/{order_id}/delete-order', [OrderController::class, 'destr
 Route::get('/orders/uncompleted-orders', [OrderController::class, 'indexUncompleted']);
 
 Route::patch('/orders/{order_id}/complete-order', [OrderController::class, 'update']);
+
+Route::get('/recommended', RecommendedController::class);
