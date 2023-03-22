@@ -41,7 +41,7 @@ final class OrderRepository
         return $orders;
     }
 
-    public static function saveOrder(OrderRequest $validated)
+    public static function saveOrder(array $validated)
     {
         $order = Order::create([
             'customer_id' => $validated['customer_id'],
