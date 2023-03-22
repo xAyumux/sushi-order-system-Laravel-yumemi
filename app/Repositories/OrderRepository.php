@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderOption;
@@ -41,7 +40,7 @@ final class OrderRepository
         return $orders;
     }
 
-    public static function saveOrder(OrderRequest $validated)
+    public static function saveOrder(array $validated)
     {
         $order = Order::create([
             'customer_id' => $validated['customer_id'],
